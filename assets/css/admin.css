@@ -171,6 +171,8 @@ body.admin{ background: #F2F1EB; }
   margin-bottom: 6px;
 }
 .variant-row{ margin-bottom: 8px; }
+.variant-row .vf{ display: flex; flex-direction: column; }
+.variant-row .vl{ display: none; }
 .variant-row input{ font-size: 12.5px; padding: 8px 10px; }
 .icon-x{
   width: 32px; height: 32px; border-radius: 8px;
@@ -229,6 +231,12 @@ body.admin{ background: #F2F1EB; }
   .variant-head{ display: none; }
   .variant-row{ grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .variant-row input{ width: 100%; min-width: 0; }
+  .variant-row .vf{ min-width: 0; }
+  .variant-row .vl{
+    display: block; margin-bottom: 4px;
+    font-size: 10.5px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--muted-2);
+  }
   .variant-row .icon-x{ grid-column: 2; justify-self: end; }
   .admin-actions{ width: 100%; }
   .admin-banner{ font-size: 12px; }

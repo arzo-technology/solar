@@ -95,7 +95,7 @@
   function unlock() {
     $("#gate").hidden = true;
     $("#app").hidden = false;
-    selectedId = (site.products[0] || {}).id || null;
+    selectedId = null;
     renderAll();
   }
 
@@ -144,7 +144,7 @@
         <h3>Basics</h3>
         <div class="ed-grid">
           <label class="field"><span>Product name</span>
-            <input data-p="name" value="${esc(p.name)}" />
+            <input data-p="name" value="${esc(p.name)}" placeholder="e.g. Hybrid Inverter H-Series" />
           </label>
           <label class="field"><span>Category</span>
             <select data-p="category">
@@ -155,7 +155,7 @@
             <input data-p="badge" value="${esc(p.badge || "")}" placeholder="Best seller" />
           </label>
           <label class="field"><span>Short description</span>
-            <textarea data-p="blurb" rows="2">${esc(p.blurb)}</textarea>
+            <textarea data-p="blurb" rows="2" placeholder="Describe the product in one sentence">${esc(p.blurb)}</textarea>
           </label>
         </div>
       </div>
@@ -166,7 +166,7 @@
           <img class="image-preview" id="imgPreview" src="${esc(p.image)}" alt="" />
           <div class="image-fields">
             <label class="field"><span>Image path or URL</span>
-              <input data-p="image" id="imgPath" value="${esc(p.image)}" />
+              <input data-p="image" id="imgPath" value="${esc(p.image)}" placeholder="assets/img/products/photo.jpg" />
             </label>
             <button class="btn btn-ghost btn-sm" type="button" data-upload>Upload a photo…</button>
             <p class="cat-key">Best size 1000 × 750 px (4:3). Uploads are stored inside the draft and travel with the export.</p>
@@ -179,10 +179,10 @@
         <div class="variant-head"><span>Label</span><span>Detail (kW / W)</span><span>Price</span><span>Old price</span><span></span></div>
         ${variants.map((v, i) => `
           <div class="variant-row">
-            <input data-v="${i}" data-k="label" value="${esc(v.label)}" placeholder="Small" aria-label="Size label" />
-            <input data-v="${i}" data-k="detail" value="${esc(v.detail || "")}" placeholder="3.6 kW" aria-label="Size detail" />
-            <input type="number" data-v="${i}" data-k="price" value="${Number(v.price) || 0}" min="0" step="1" aria-label="Price" />
-            <input type="number" data-v="${i}" data-k="compareAt" value="${v.compareAt ? Number(v.compareAt) : ""}" min="0" step="1" placeholder="—" aria-label="Old price" />
+            <label class="vf"><span class="vl">Label</span><input data-v="${i}" data-k="label" value="${esc(v.label)}" placeholder="Small" aria-label="Size label" /></label>
+            <label class="vf"><span class="vl">Detail (kW / W)</span><input data-v="${i}" data-k="detail" value="${esc(v.detail || "")}" placeholder="3.6 kW" aria-label="Size detail" /></label>
+            <label class="vf"><span class="vl">Price</span><input type="number" data-v="${i}" data-k="price" value="${v.price ? Number(v.price) : ""}" min="0" step="1" placeholder="0" aria-label="Price" /></label>
+            <label class="vf"><span class="vl">Old price</span><input type="number" data-v="${i}" data-k="compareAt" value="${v.compareAt ? Number(v.compareAt) : ""}" min="0" step="1" placeholder="—" aria-label="Old price" /></label>
             <button class="icon-x" type="button" data-rm-variant="${i}" aria-label="Remove size">✕</button>
           </div>`).join("")}
         <button class="add-link" type="button" data-add-variant>+ Add another size</button>
@@ -287,13 +287,13 @@
       const id = "product-" + Date.now().toString(36);
       site.products.unshift({
         id,
-        name: "New product",
+        name: "",
         category: (site.categories[0] || {}).key || "systems",
-        image: "assets/img/products/system-home.jpg",
-        blurb: "Describe the product in one sentence.",
+        image: "",
+        blurb: "",
         features: [],
         specs: {},
-        variants: [{ label: "Small", detail: "", price: 0 }],
+        variants: [{ label: "", detail: "", price: 0 }],
       });
       selectedId = id;
       save(); renderAll();
