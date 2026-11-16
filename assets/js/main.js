@@ -446,7 +446,7 @@
         <div class="quote-empty">
           ${icon("cart")}
           <p><strong>Your quote is empty.</strong><br />Add products and we will send a single message with the full list.</p>
-          <button class="btn btn-ghost btn-sm" data-close-drawer>Browse products</button>
+          <a class="btn btn-ghost btn-sm" href="#shop" data-close-drawer>Browse products</a>
         </div>`;
     } else {
       body.innerHTML = `
