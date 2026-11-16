@@ -1008,6 +1008,15 @@ input[type="range"]::-moz-range-thumb{
 .process-step h3{ font-size: .98rem; margin-bottom: 6px; font-family: var(--font-body); font-weight: 600; letter-spacing: -.01em; }
 .process-step p{ font-size: 12.8px; color: var(--muted); line-height: 1.55; }
 
+/* How it works — the steps shown on the dark section */
+.section-dark .process-step{ border-top-color: rgba(255,255,255,.18); }
+.section-dark .process-step::before{ background: var(--accent); box-shadow: 0 0 0 4px rgba(201,242,94,.16); }
+.section-dark .process-num{ color: var(--accent); }
+.section-dark .process-step h3{ color: inherit; font-size: 1.05rem; }
+.section-dark .process-step p{ color: inherit; opacity: .72; font-size: 13.5px; }
+.process-cta{ display: flex; justify-content: center; margin-top: clamp(34px, 4vw, 48px); }
+@media print{ .section-dark .process-num{ color: inherit; } }
+
 /* ------------------------------------------------------------- 11. REVIEWS */
 .rating-summary{ display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
 .stars{ color: #E8A317; letter-spacing: 3px; font-size: 15px; }
