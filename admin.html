@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Catalogue admin — Arzo Technology</title>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body class="admin">
+
+<!-- PIN gate -->
+<div class="gate" id="gate">
+  <form class="gate-card" id="gateForm">
+    <div class="gate-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="7.5" fill="currentColor"/>
+        <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".85">
+          <path d="M20 3.5v5M20 31.5v5M3.5 20h5M31.5 20h5M8.3 8.3l3.5 3.5M28.2 28.2l3.5 3.5M31.7 8.3l-3.5 3.5M11.8 28.2l-3.5 3.5"/>
+        </g>
+      </svg>
+    </div>
+    <h1>Catalogue admin</h1>
+    <p class="gate-sub">Enter the PIN to edit products, prices and categories.</p>
+    <label class="field">
+      <span>PIN</span>
+      <input type="password" id="pinInput" inputmode="numeric" autocomplete="off" placeholder="••••" required />
+    </label>
+    <button class="btn btn-primary btn-block" type="submit">Unlock</button>
+    <p class="gate-err" id="gateErr" hidden>Wrong PIN. Try again.</p>
+    <p class="gate-hint">The PIN is set in <code>site.config.js</code> → <code>admin.pin</code>. Change it before you hand the site to a client.</p>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <header class="admin-top">
+    <div class="admin-brand">
+      <span class="admin-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="7.5" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".85">
+            <path d="M20 3.5v5M20 31.5v5M3.5 20h5M31.5 20h5M8.3 8.3l3.5 3.5M28.2 28.2l3.5 3.5M31.7 8.3l-3.5 3.5M11.8 28.2l-3.5 3.5"/>
+          </g>
+        </svg>
+      </span>
+      <div>
+        <strong id="brandName">Arzo Technology</strong>
+        <small>Catalogue admin</small>
+      </div>
+    </div>
+    <div class="admin-actions">
+      <a class="btn btn-ghost btn-sm" href="index.html" id="viewBtn">View site</a>
+      <a class="btn btn-ghost btn-sm" href="index.html?draft=1" target="_blank" id="previewBtn">Preview draft</a>
+      <button class="btn btn-ghost btn-sm" id="importBtn" type="button">Import</button>
+      <button class="btn btn-primary btn-sm" id="exportBtn" type="button">Export site.config.js</button>
+      <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">Reset</button>
+    </div>
+  </header>
+
+  <div class="admin-banner" id="banner">
+    <strong>Draft mode.</strong> Changes are stored in <em>this browser only</em> until you click
+    <b>Export site.config.js</b> and replace <code>assets/js/site.config.js</code> on your host.
+    <span id="saveState" class="save-state">No changes yet</span>
+  </div>
+
+  <nav class="admin-tabs" id="tabs">
+    <button type="button" data-tab="products" class="is-active">Products <span id="countProducts"></span></button>
+    <button type="button" data-tab="categories">Categories <span id="countCategories"></span></button>
+    <button type="button" data-tab="business">Business info</button>
+  </nav>
+
+  <main class="admin-main">
+    <section class="admin-panel" id="tab-products">
+      <div class="admin-split">
+        <aside class="admin-list">
+          <button class="btn btn-primary btn-sm btn-block" id="addProduct" type="button">+ Add product</button>
+          <div class="list" id="productList"></div>
+        </aside>
+        <div class="admin-editor" id="productEditor">
+          <div class="editor-empty">Select a product on the left, or add a new one.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-panel" id="tab-categories" hidden>
+      <div class="admin-narrow">
+        <div class="panel-head">
+          <div>
+            <h2>Categories</h2>
+            <p>These are the filter buttons on the shop page and the cards in "What we sell".</p>
+          </div>
+          <button class="btn btn-primary btn-sm" id="addCategory" type="button">+ Add category</button>
+        </div>
+        <div id="categoryList" class="cat-list"></div>
+      </div>
+    </section>
+
+    <section class="admin-panel" id="tab-business" hidden>
+      <div class="admin-narrow">
+        <div class="panel-head">
+          <div>
+            <h2>Business info</h2>
+            <p>Phone, WhatsApp, colours and currency. This is everything a new client would change.</p>
+          </div>
+        </div>
+        <div id="businessForm" class="biz-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="admin-foot">
+    <span>Arzo Technology catalogue admin · <span id="draftTime">no draft</span></span>
+    <span class="admin-foot-warn">Anyone with the file can read the PIN — it stops accidents, not attackers.</span>
+  </footer>
+</div>
+
+<input type="file" id="fileInput" accept="image/*" hidden />
+<input type="file" id="importInput" accept=".json,application/json" hidden />
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/site.config.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

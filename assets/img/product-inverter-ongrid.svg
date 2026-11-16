@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="On-grid string inverter">
+  <defs>
+    <linearGradient id="obg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F1F6EE"/>
+      <stop offset="1" stop-color="#DCE8D9"/>
+    </linearGradient>
+    <radialGradient id="oglow" cx="0.82" cy="0.12" r="0.55">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="obody" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FBFCFA"/>
+      <stop offset=".6" stop-color="#E9EDE7"/>
+      <stop offset="1" stop-color="#CBD4C9"/>
+    </linearGradient>
+    <linearGradient id="oscreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0E2A22"/>
+      <stop offset="1" stop-color="#06120F"/>
+    </linearGradient>
+    <filter id="oshadow" x="-40%" y="-30%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#0E4A38" flood-opacity=".22"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#obg)"/>
+  <rect width="800" height="600" fill="url(#oglow)"/>
+
+  <ellipse cx="404" cy="512" rx="180" ry="22" fill="#0E4A38" opacity=".12"/>
+
+  <!-- body -->
+  <rect x="272" y="146" width="266" height="330" rx="20" fill="url(#obody)" filter="url(#oshadow)"/>
+  <rect x="272" y="146" width="8" height="330" rx="4" fill="#0E4A38" opacity=".55"/>
+
+  <!-- screen -->
+  <rect x="304" y="178" width="150" height="86" rx="10" fill="url(#oscreen)"/>
+  <text x="320" y="204" font-family="Inter, Segoe UI, sans-serif" font-size="11" letter-spacing="1.4" fill="#7E9A8C">EFFICIENCY</text>
+  <text x="320" y="242" font-family="Sora, Inter, sans-serif" font-size="30" font-weight="600" fill="#C9F25E">98.4%</text>
+
+  <!-- fan grille -->
+  <circle cx="486" cy="221" r="34" fill="none" stroke="#C3CCC2" stroke-width="2"/>
+  <circle cx="486" cy="221" r="22" fill="none" stroke="#C3CCC2" stroke-width="2"/>
+  <circle cx="486" cy="221" r="7" fill="#B9C3B8"/>
+  <path d="M486 199v44M464 221h44M470.5 205.5l31 31M501.5 205.5l-31 31" stroke="#D2D9D0" stroke-width="2"/>
+
+  <!-- status row -->
+  <g>
+    <rect x="304" y="292" width="44" height="44" rx="10" fill="#EEF2EC"/>
+    <circle cx="326" cy="314" r="6" fill="#3DDC84"/>
+    <rect x="360" y="292" width="44" height="44" rx="10" fill="#EEF2EC"/>
+    <path d="M377 316h10M377 311h10M377 321h10" stroke="#0E4A38" stroke-width="2" stroke-linecap="round"/>
+    <rect x="416" y="292" width="44" height="44" rx="10" fill="#EEF2EC"/>
+    <path d="M432 320a6 6 0 0 1 12 0" stroke="#0E4A38" stroke-width="2" fill="none"/>
+    <path d="M438 306v8" stroke="#0E4A38" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- vents -->
+  <g fill="#C8D0C6" opacity=".8">
+    <rect x="304" y="362" width="156" height="5" rx="2.5"/>
+    <rect x="304" y="376" width="156" height="5" rx="2.5"/>
+    <rect x="304" y="390" width="156" height="5" rx="2.5"/>
+    <rect x="304" y="404" width="156" height="5" rx="2.5"/>
+    <rect x="304" y="418" width="156" height="5" rx="2.5"/>
+    <rect x="304" y="432" width="156" height="5" rx="2.5"/>
+  </g>
+
+  <!-- connectors -->
+  <g fill="#3A4640">
+    <rect x="480" y="452" width="16" height="12" rx="5"/>
+    <rect x="504" y="452" width="16" height="12" rx="5"/>
+  </g>
+</svg>
