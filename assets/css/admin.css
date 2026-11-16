@@ -238,6 +238,10 @@ body.admin{ background: #F2F1EB; }
     text-transform: uppercase; color: var(--muted-2);
   }
   .variant-row .icon-x{ grid-column: 2; justify-self: end; }
+  .cat-row{ grid-template-columns: minmax(0, 1fr) 34px; }
+  .cat-row input{ width: 100%; min-width: 0; }
+  .cat-row > input{ grid-column: 1; }
+  .cat-row .icon-x{ grid-column: 2; grid-row: 1; align-self: start; }
   .admin-actions{ width: 100%; }
   .admin-banner{ font-size: 12px; }
   .save-state{ margin-left: 0; }
