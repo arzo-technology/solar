@@ -399,6 +399,10 @@
     state.cart.splice(index, 1);
     saveCart(); syncCartCount(); renderCart();
   }
+  function clearCart() {
+    state.cart = [];
+    saveCart(); syncCartCount(); renderCart();
+  }
 
   function quoteMessage() {
     const lines = state.cart.map((it) => {
@@ -445,7 +449,10 @@
           <button class="btn btn-ghost btn-sm" data-close-drawer>Browse products</button>
         </div>`;
     } else {
-      body.innerHTML = state.cart.map((it, i) => {
+      body.innerHTML = `
+        <div class="quote-clear-row">
+          <button type="button" class="quote-clear" data-clear>Clear all</button>
+        </div>` + state.cart.map((it, i) => {
         const p = productById(it.id);
         const v = p.variants[it.v] || p.variants[0];
         return `
@@ -456,10 +463,15 @@
               <p class="quote-item-variant">${esc(v.label)}${v.detail ? " · " + esc(v.detail) : ""}</p>
               <p class="quote-item-price">${money(v.price * it.q)}</p>
             </div>
-            <div class="qty">
-              <button data-qty="-1" data-index="${i}" aria-label="Decrease quantity">−</button>
-              <span>${it.q}</span>
-              <button data-qty="1" data-index="${i}" aria-label="Increase quantity">+</button>
+            <div class="quote-item-side">
+              <button type="button" class="quote-remove" data-remove data-index="${i}" aria-label="Remove ${esc(p.name)} from quote">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+              </button>
+              <div class="qty">
+                <button data-qty="-1" data-index="${i}" aria-label="Decrease quantity">−</button>
+                <span>${it.q}</span>
+                <button data-qty="1" data-index="${i}" aria-label="Increase quantity">+</button>
+              </div>
             </div>
           </div>`;
       }).join("");
@@ -873,6 +885,13 @@
       const qtyBtn = e.target.closest("[data-qty]");
       if (qtyBtn) {
         changeQty(Number(qtyBtn.dataset.index), Number(qtyBtn.dataset.qty));
+      }
+      const removeBtn = e.target.closest("[data-remove]");
+      if (removeBtn) {
+        removeItem(Number(removeBtn.dataset.index));
+      }
+      if (e.target.closest("[data-clear]")) {
+        if (window.confirm("Remove all items from your quote?")) clearCart();
       }
     });
 
